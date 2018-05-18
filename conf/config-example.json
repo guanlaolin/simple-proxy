@@ -1,0 +1,21 @@
+{
+	"note":"please rename to config.json",
+	
+	"http":{
+		"addr":"0.0.0.0",
+		"port":8888
+	},
+	
+	"https":{
+		"addr":"0.0.0.0",
+		"port":8889,
+		"cert-path":"$SIMPLE_PROXY/ca/ca.pem",
+		"key-path":"$SIMPLE_PROXY/ca/ca.key"
+	},
+	
+	"proxy":{
+		"localhost":"github.com",
+		"dogod.top":"github.com",
+		"www.dogod.top":"github.com"
+	}
+}
