@@ -42,7 +42,7 @@ func main() {
 func listenHttpServer() {
 	defer waitGroup.Done()
 
-	log.Printf("Starting HTTP server..., Addr:%s, Port:%d\n",
+	log.Printf(" Addr:%s, Port:%d, Starting HTTP server...\n",
 		conf.HTTP.Addr, conf.HTTP.Port)
 
 	addr := conf.HTTP.Addr + ":" + strconv.Itoa(conf.HTTP.Port)
@@ -60,7 +60,7 @@ func listenHttpServer() {
 func listenHttpsServer() {
 	waitGroup.Done()
 
-	log.Printf("Starting HTTPS server..., Addr:%s, Port:%d\n",
+	log.Printf(" Addr:%s, Port:%d, Starting HTTPS server...\n",
 		conf.HTTPS.HTTPConfig.Addr, conf.HTTPS.HTTPConfig.Port)
 
 	addr := conf.HTTPS.HTTPConfig.Addr + ":" +

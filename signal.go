@@ -16,7 +16,7 @@ func signalProcess() {
 		switch <-sig {
 		case syscall.SIGHUP:
 			log.Println("SIGHUP")
-			conf.reload("...")
+			conf.reload(CONF_PATH)
 		}
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 )
 
@@ -40,9 +41,27 @@ func (conf *Config) load(path string) error {
 }
 
 func (conf *Config) reload(path string) {
-	conf.load(path)
+	var temp *Config = new(Config)
+
+	err := temp.load(path)
+	if err != nil {
+		log.Println("Config reload failed and without change. Please check config. ", err)
+		return
+	}
+
+	log.Println("Config reload finished.")
+	conf = temp
+	conf.dispaly()
 }
 
 func (conf *Config) dispaly() {
-	fmt.Println(conf)
+	//fmt.Println(conf)
+	fmt.Println("---------------- Current config ----------------")
+	fmt.Println("HTTP: ", conf.HTTP)
+	fmt.Println("HTTPS: ", conf.HTTPS)
+	fmt.Println("Proxy: ")
+	for k, v := range conf.Proxy {
+		fmt.Printf("%s: %s\n", k, v)
+	}
+	fmt.Println("-----------------------END----------------------")
 }
