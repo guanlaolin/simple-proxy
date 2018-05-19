@@ -9,8 +9,8 @@
 	"https":{
 		"addr":"0.0.0.0",
 		"port":8889,
-		"cert-path":"$CERT_PATH",
-		"key-path":"$KEY_PATH"
+		"cert":"$CERT_PATH",
+		"key":"$KEY_PATH"
 	},
 	
 	"proxy":{

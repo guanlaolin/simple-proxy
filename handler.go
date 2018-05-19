@@ -1,8 +1,6 @@
 package main
 
 import (
-	"config"
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -14,22 +12,14 @@ func http2httpsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func domainHandler(w http.ResponseWriter, r *http.Request) {
-	proxy, err := config.ConfigGetMapInterface("proxy")
-	if err != nil {
-		log.Println("ConfigGetMapInterface,", err)
-	}
+	proxy := conf.Proxy
 
 	host := strings.Split(r.Host, ":")[0]
-
-	if nil == proxy[host] {
+	if "" == proxy[host] {
 		log.Println("Proxy Not Found, Please check config")
+		http.Error(w, "Proxy not set, Please contact admin.", http.StatusNotFound)
 		return
 	}
 
-	v, ok := proxy[host].(string)
-	if !ok {
-		log.Println(proxy[host], " is type ", fmt.Sprintf("%T", proxy[host]), " not type string")
-	}
-
-	http.Redirect(w, r, v, http.StatusFound)
+	http.Redirect(w, r, proxy[host], http.StatusFound)
 }
