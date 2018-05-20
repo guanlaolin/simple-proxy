@@ -3,12 +3,18 @@ package main
 import (
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
 func http2httpsHandler(w http.ResponseWriter, r *http.Request) {
-	//url := "https://" + r.Host + ":"
-	//http.Redirect(w, r)
+	https := r.URL
+
+	https.Scheme = "https"
+	https.Host = strings.Split(r.Host, ":")[0] + ":" + strconv.Itoa(conf.HTTPS.Port)
+	log.Println("convert to https request:", https.String())
+
+	http.Redirect(w, r, https.String(), http.StatusTemporaryRedirect)
 }
 
 func domainHandler(w http.ResponseWriter, r *http.Request) {

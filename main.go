@@ -48,7 +48,7 @@ func listenHttpServer() {
 	addr := conf.HTTP.Addr + ":" + strconv.Itoa(conf.HTTP.Port)
 	log.Println("HTTP addr:", addr)
 
-	err := http.ListenAndServe(addr, nil)
+	err := http.ListenAndServe(addr, http.HandlerFunc(http2httpsHandler))
 	if err != nil {
 		log.Println("HTTP servr start failed,", err)
 		return
@@ -75,4 +75,8 @@ func listenHttpsServer() {
 	}
 
 	log.Println("HTTP server exit...")
+}
+
+func resourcesClean() {
+
 }
